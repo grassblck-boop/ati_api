@@ -1,12 +1,11 @@
 <?php
-$host = "localhost";
-$username = "root"; // Default XAMPP username
-$password = "";     // Default XAMPP password is blank
-$database = "ati_incident_db"; // The database name you created
+$host     = getenv('DB_HOST') ?: 'localhost';
+$username = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASS') ?: '';
+$database = getenv('DB_NAME') ?: 'ati_incident_db';
 
 $conn = new mysqli($host, $username, $password, $database);
 
-// Check connection
 if ($conn->connect_error) {
     die(json_encode(["status" => "error", "message" => "Database connection failed: " . $conn->connect_error]));
 }
